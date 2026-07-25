@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router"
 import { useIsFetching } from "@tanstack/react-query"
 import type { SourceID } from "@shared/types"
+import { useAtom } from "jotai"
+import { isDarkAtom } from "~/atoms/theme"
 import { NavBar } from "../navbar"
 import { Menu } from "./menu"
 import { currentSourcesAtom, goToTopAtom } from "~/atoms"
@@ -45,6 +47,18 @@ function Refresh() {
   )
 }
 
+function ThemeToggle() {
+  const [isDark, setIsDark] = useAtom(isDarkAtom)
+  return (
+    <button
+      type="button"
+      title={isDark ? "Light Mode" : "Dark Mode"}
+      className={$("btn transition-all", isDark ? "i-ph:sun-dim-duotone" : "i-ph:moon-stars-duotone")}
+      onClick={() => setIsDark(!isDark)}
+    />
+  )
+}
+
 export function Header() {
   return (
     <>
@@ -71,6 +85,7 @@ export function Header() {
       <span className="justify-self-end flex gap-2 items-center text-xl text-primary-600 dark:text-primary">
         <GoTop />
         <Refresh />
+        <ThemeToggle />
         <Github />
         <Menu />
       </span>
