@@ -4,26 +4,7 @@ import type { SourceID } from "@shared/types"
 import { useAtom } from "jotai"
 import { isDarkAtom } from "~/atoms/theme"
 import { NavBar } from "../navbar"
-import { Menu } from "./menu"
 import { currentSourcesAtom, goToTopAtom } from "~/atoms"
-
-function GoTop() {
-  const { ok, fn: goToTop } = useAtomValue(goToTopAtom)
-  return (
-    <button
-      type="button"
-      title="Go To Top"
-      className={$("i-ph:arrow-fat-up-duotone", ok ? "op-50 btn" : "op-0")}
-      onClick={goToTop}
-    />
-  )
-}
-
-function Github() {
-  return (
-    <button type="button" title="Github" className="i-ph:github-logo-duotone btn" onClick={() => window.open(Homepage)} />
-  )
-}
 
 function Refresh() {
   const currentSources = useAtomValue(currentSourcesAtom)
@@ -83,11 +64,8 @@ export function Header() {
         </span>
       </span>
       <span className="justify-self-end flex gap-2 items-center text-xl text-primary-600 dark:text-primary">
-        <GoTop />
         <Refresh />
         <ThemeToggle />
-        <Github />
-        <Menu />
       </span>
     </>
   )
